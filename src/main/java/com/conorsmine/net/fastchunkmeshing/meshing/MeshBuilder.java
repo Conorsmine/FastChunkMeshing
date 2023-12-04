@@ -1,6 +1,6 @@
-package com.conorsmine.net.gpufastraytrace.meshing;
+package com.conorsmine.net.fastchunkmeshing.meshing;
 
-import com.conorsmine.net.gpufastraytrace.util.MathUtil;
+import com.conorsmine.net.fastchunkmeshing.util.MathUtil;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;

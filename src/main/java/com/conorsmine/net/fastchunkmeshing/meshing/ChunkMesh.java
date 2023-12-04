@@ -1,4 +1,4 @@
-package com.conorsmine.net.gpufastraytrace.meshing;
+package com.conorsmine.net.fastchunkmeshing.meshing;
 
 import java.util.*;
 import java.util.stream.Collectors;

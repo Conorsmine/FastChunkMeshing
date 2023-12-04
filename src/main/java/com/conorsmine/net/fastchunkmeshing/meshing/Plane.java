@@ -1,6 +1,6 @@
-package com.conorsmine.net.gpufastraytrace.meshing;
+package com.conorsmine.net.fastchunkmeshing.meshing;
 
-import com.conorsmine.net.gpufastraytrace.util.BitUtil;
+import com.conorsmine.net.fastchunkmeshing.util.BitUtil;
 
 public class Plane {
     private final long data;

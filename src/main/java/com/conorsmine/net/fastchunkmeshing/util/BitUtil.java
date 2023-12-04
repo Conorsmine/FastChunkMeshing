@@ -1,4 +1,4 @@
-package com.conorsmine.net.gpufastraytrace.util;
+package com.conorsmine.net.fastchunkmeshing.util;
 
 public final class BitUtil {
 

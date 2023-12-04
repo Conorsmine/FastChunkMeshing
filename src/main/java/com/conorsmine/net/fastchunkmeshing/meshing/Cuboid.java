@@ -1,4 +1,4 @@
-package com.conorsmine.net.gpufastraytrace.meshing;
+package com.conorsmine.net.fastchunkmeshing.meshing;
 
 public class Cuboid {
 
