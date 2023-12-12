@@ -18,10 +18,6 @@ public class ChunkMesh {
         this.chunkCuboids = List.copyOf(chunkCuboids);
     }
 
-    public List<Cuboid> getChunkCuboids() {
-        return chunkCuboids;
-    }
-
     public List<Plane> getPlanes() {
         return chunkCuboids.stream()
                 .map(Cuboid::toPlanes)
@@ -30,10 +26,14 @@ public class ChunkMesh {
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getZ() {
-        return z;
+        return this.z;
+    }
+
+    public List<Cuboid> getChunkCuboids() {
+        return this.chunkCuboids;
     }
 }

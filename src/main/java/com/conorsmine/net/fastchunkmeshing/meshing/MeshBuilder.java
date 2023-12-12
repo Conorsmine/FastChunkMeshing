@@ -60,14 +60,19 @@ public final class MeshBuilder {
         for (Chunk parseChunk : parseChunks) {
             final ChunkSnapshot chunkSnapshot = parseChunk.getChunkSnapshot(true, false, false);
             final int yMinWorld = parseChunk.getWorld().getMinHeight();
-            final int yMax = parseChunk.getWorld().getMaxHeight();
 
             EXECUTOR.submit(() -> {
-                final int yMin = getHighestYValue(chunkSnapshot, yMinWorld);
-                chunkMeshes.add(meshChunk(chunkSnapshot, yMin, yMax));
+                try {
+                    int yMax = getHighestYValue(chunkSnapshot, yMinWorld) + 2;
+                    if (yMax > parseChunk.getWorld().getMaxHeight()) yMax = parseChunk.getWorld().getMaxHeight();
 
-                if (finished.incrementAndGet() == toComplete)
-                    future.complete(chunkMeshes);
+                    chunkMeshes.add(meshChunk(chunkSnapshot, yMinWorld, yMax));
+
+                    if (finished.get() == (toComplete - 1))
+                        future.complete(chunkMeshes);
+                }
+                catch (Exception e) { future.completeExceptionally(e); }
+                finally               { finished.incrementAndGet(); }
             });
         }
 
@@ -101,7 +106,7 @@ public final class MeshBuilder {
                     length = cuboidLayerMask.length;
                     height = getCuboidHeight(chunkBitLayers, cuboidLayerMask, i1, i);
 
-                    for (int j = i; j < height + i; j++) removeLayerMask(chunkBitLayers[j], cuboidLayerMask, i1);
+                    for (int j = i; j <= height + i; j++) removeLayerMask(chunkBitLayers[j], cuboidLayerMask, i1);
 
                     final Cuboid e = new Cuboid(
                             (byte) i1,
@@ -123,7 +128,8 @@ public final class MeshBuilder {
         final short[][] chunkLayers = new short[yMax - yMin][16];
 
         for (int y = yMin; y < yMax; y++) {
-            chunkLayers[y + Math.abs(yMin)] = createBitLayer(chunk, y);
+            final short[] bitLayer = createBitLayer(chunk, y);
+            chunkLayers[y + Math.abs(yMin)] = bitLayer;
         }
 
         return chunkLayers;
