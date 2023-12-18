@@ -9,8 +9,32 @@ public class Plane {
         this.data = BitUtil.compressCoordsToLong(x1, y1, z1, x2, y2, z2);
     }
 
-    public int[] getCoords() {
+    private int[] getCoords() {
         return BitUtil.uncompressChunkCoords(data);
+    }
+
+    public byte getXOne() {
+        return (byte) getCoords()[0];
+    }
+
+    public byte getXTwo() {
+        return (byte) getCoords()[3];
+    }
+
+    public short getYOne() {
+        return (short) getCoords()[1];
+    }
+
+    public short getYTwo() {
+        return (short) getCoords()[4];
+    }
+
+    public byte getZOne() {
+        return (byte) getCoords()[2];
+    }
+
+    public byte getZTwo() {
+        return (byte) getCoords()[5];
     }
 
     @Override
